@@ -25,11 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import java.net.HttpURLConnection
@@ -63,7 +61,7 @@ class MainActivity : ComponentActivity() {
             var refreshed by remember { mutableStateOf("") }
             var configured by remember { mutableStateOf(false) }
 
-            LaunchedEffect(Unit) {
+            LaunchedEffect(host) {
                 while (isActive) {
                     val address = host.trim().removePrefix("http://").removeSuffix("/")
                     if (address.isNotBlank()) {
